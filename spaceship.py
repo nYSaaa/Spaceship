@@ -143,7 +143,7 @@ def main():
             draw_winner(winner_text)
             break
 
-        keys_pressed = pygame.key.get_pressed
+        keys_pressed = pygame.key.get_pressed()
         yellow_handle_movement(keys_pressed, yellow)
         red_handle_movement(keys_pressed, red)
 
@@ -153,12 +153,12 @@ def main():
     return False
 
 if __name__  == "__main__":
-    game_running = True
-    while game_running:
-        game_running = main()
+    game_running_application = True
+    while game_running_application:
+        game_running_application = main()
         for event in pygame.event.get():
             if event.type == pygame.QUIT: 
-                game_running = False 
+                game_running_application = False 
                 break
 
     pygame.quit()
