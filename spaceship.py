@@ -40,7 +40,7 @@ def draw_window(red,yellow,red_bullets, yellow_bullets,red_health, yellow_health
     pygame.draw.rect(WIN, BLACK, BORDER)
 
     red_health_text = HEALTH_FONT.render("Health: " + str(red_health), 1,WHITE)
-    yellow_health_text = HEALTH_FONT.render("Health: "+ str(red_health),1, WHITE)
+    yellow_health_text = HEALTH_FONT.render("Health: "+ str(yellow_health),1, WHITE)
     WIN.blit(red_health_text,(WIDTH - red_health_text.get_width()-10,10))
     WIN.blit(yellow_health_text,(10,10))
 
@@ -115,7 +115,6 @@ def main():
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 run = False
-                pygame.quit()
             
             if event.type == pygame.KEYDOWN:
                 print(f'key_pressed:{event.key}')
@@ -134,21 +133,21 @@ def main():
                 yellow_health -= 1 
         
         winner_text = ""
-        if red_health < 0 :
+        if red_health <= 0 :
             winner_text = "Yellow Wins!"
         
-        if yellow_health < 0:
+        if yellow_health <= 0:
             winner_text = "Red Wins!"
         
         if winner_text != "":
             draw_winner(winner_text)
             break
 
-        keys_pressed = pygame.key.get_pressed()
+        keys_pressed = pygame.key.get_pressed
         yellow_handle_movement(keys_pressed, yellow)
         red_handle_movement(keys_pressed, red)
 
-        handle_bullets = (yellow_bullets,red_bullets,yellow,red)
+        handle_bullets(yellow_bullets,red_bullets,yellow,red)
 
         draw_window(red, yellow, red_bullets, yellow_bullets,red_health,yellow_health)
     return False
@@ -157,4 +156,9 @@ if __name__  == "__main__":
     game_running = True
     while game_running:
         game_running = main()
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT: 
+                game_running = False 
+                break
+
     pygame.quit()
